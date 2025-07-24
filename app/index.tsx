@@ -1,10 +1,12 @@
 import '@/global.css'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import { Link } from 'expo-router'
 
 export default function Index() {
   return (
-    <View className=' flex justify-center items-center'>
-      <Text className=' text-red-500'>Edit app/index.tsx to edit this screen.</Text>
+    <View className=" flex justify-center items-center">
+      <Link href="/about">About Page</Link>
+      <Link href="/profile">Profile Page</Link>
     </View>
   )
 }
