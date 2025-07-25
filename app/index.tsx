@@ -7,6 +7,9 @@ export default function Index() {
       <Link href="/about">About Page</Link>
       <Link href="/profile">Profile Page</Link>
       <Link href="/products">Products</Link>
+      <Link href="/register">Register</Link>
+      <Link href="/login">Login</Link>
+      <Link href="/forgot-password">Forgot-password</Link>
     </View>
   )
 }
