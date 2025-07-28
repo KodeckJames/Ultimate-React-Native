@@ -1,5 +1,5 @@
-import { View } from 'react-native'
-import { Link } from 'expo-router'
+import { View, Pressable, Text } from 'react-native'
+import { Link, router } from 'expo-router'
 
 export default function Index() {
   //import Redirect from expo-router for this to work
@@ -16,6 +16,9 @@ export default function Index() {
       <Link href="/register">Register</Link>
       <Link href="/login">Login</Link>
       <Link href="/forgot-password">Forgot-password</Link>
+      <Pressable className=' bg-orange-500 p-2 rounded-lg' onPress={()=>router.push('/modal')}>
+        <Text>Modal</Text>
+      </Pressable>
     </View>
   )
 }
