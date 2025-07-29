@@ -13,7 +13,7 @@ export default function RootLayout() {
         name="modal"
         options={{
           title: 'Modal',
-          presentation:'modal'
+          presentation:'formSheet'
         }}
       />
     </Stack>
