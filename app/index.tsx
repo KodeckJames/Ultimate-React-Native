@@ -19,6 +19,7 @@ export default function Index() {
       <Pressable className=' bg-orange-500 p-2 rounded-lg' onPress={()=>router.push('/modal')}>
         <Text>Modal</Text>
       </Pressable>
+      <Link href={'/modal2'}>Modal2</Link>
     </View>
   )
 }
