@@ -1,4 +1,4 @@
-import { View, Pressable, Text } from 'react-native'
+import { View, Pressable, Text, ActivityIndicator } from 'react-native'
 import { Link, router } from 'expo-router'
 
 export default function Index() {
@@ -10,6 +10,7 @@ export default function Index() {
   return (
     
     <View className=" flex justify-center items-center min-h-screen">
+      <ActivityIndicator size={'large'} color={'red'} animating={true } />
       <Link href="/about">About Page</Link>
       <Link href="/profile">Profile Page</Link>
       <Link href="/products">Products</Link>
