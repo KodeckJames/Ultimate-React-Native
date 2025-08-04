@@ -15,7 +15,7 @@ export default function Index() {
   //   return <Redirect href={'/login'}/>
   // }
   return (
-    <View className=" flex justify-center items-center min-h-screen">
+    <View className=" flex-1 justify-center items-center min-h-screen">
       <ActivityIndicator size={'large'} color={'red'} animating={true} />
       <Link href="/about">About Page</Link>
       <Link href="/profile">Profile Page</Link>
@@ -23,6 +23,7 @@ export default function Index() {
       <Link href="/register">Register</Link>
       <Link href="/login">Login</Link>
       <Link href="/forgot-password">Forgot-password</Link>
+      <Link href="/dynamicUI/index">Dynamic UI</Link>
       <Pressable
         className=" bg-orange-500 p-2 rounded-lg"
         onPress={() => router.push('/modal')}
