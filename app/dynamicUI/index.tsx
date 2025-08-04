@@ -1,22 +1,9 @@
-import { View, Text, Dimensions } from 'react-native'
-import { useState, useEffect } from 'react'
+import { View, Text, useWindowDimensions } from 'react-native'
 
 export default function DynamicUIPage() {
-  const [dimensions, setDimensions] = useState({
-    window: Dimensions.get('window'),
-  })
-
-  useEffect(() => {
-    const subscription = Dimensions.addEventListener('change', ({ window }) => {
-      setDimensions({ window })
-    })
-    return () => subscription?.remove()
-  })
-
-  const { window } = dimensions
-  const windowWidth = window.width
-  const windowHeight = window.height
-
+  const windowWidth = useWindowDimensions().width;
+  const windowHeight = useWindowDimensions().height;
+  
   return (
     <View className=" flex-1 justify-center items-center min-h-screen bg-purple-500">
       <View
