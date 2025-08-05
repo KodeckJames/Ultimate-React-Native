@@ -1,6 +1,7 @@
-import { View, Text, SafeAreaView, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, SectionList } from 'react-native'
 import React from 'react'
 import pokemons from '@/data/pokemonList.json'
+import groupedPokemons from '@/data/grouped-data.json'
 
 export default function FlatListComponent() {
   return (
@@ -19,6 +20,18 @@ export default function FlatListComponent() {
             <View key={item.id}>
               <Text>{item.type}</Text>
               <Text>{item.name}</Text>
+            </View>
+          )
+        }}
+      />
+      <SectionList
+        sections={groupedPokemons}
+        renderSectionHeader={({ section }) => <Text>{section.type}</Text>}
+        SectionSeparatorComponent={() => <View style={{ height: 16 }} />}
+        renderItem={({ item }) => {
+          return (
+            <View>
+              <Text>{item}</Text>
             </View>
           )
         }}
