@@ -23,7 +23,8 @@ export default function Index() {
       <Link href="/register">Register</Link>
       <Link href="/login">Login</Link>
       <Link href="/forgot-password">Forgot-password</Link>
-      {/* <Link href="/dynamicUI/index">Dynamic UI</Link> */}
+      <Link href="/flatList">FlatList</Link>
+      <Link href="/dynamicUI">Dynamic UI</Link>
       <Pressable
         className=" bg-orange-500 p-2 rounded-lg"
         onPress={() => router.push('/modal')}
