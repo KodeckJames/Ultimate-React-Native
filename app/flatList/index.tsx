@@ -10,6 +10,7 @@ export default function FlatListComponent() {
         horizontal={false}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        ListEmptyComponent={<Text>No Items found</Text>}
         renderItem={({ item }) => {
           //   console.log(item.id);
           return (
