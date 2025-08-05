@@ -11,6 +11,8 @@ export default function FlatListComponent() {
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         ListEmptyComponent={<Text>No Items found</Text>}
+        ListHeaderComponent={<Text>Pokemon Cards Header</Text>}
+        ListFooterComponent={<Text>Pokemon Cards Footer</Text>}
         renderItem={({ item }) => {
           //   console.log(item.id);
           return (
