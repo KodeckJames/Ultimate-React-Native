@@ -17,6 +17,11 @@ export default function TextInputComponent() {
         autoCorrect={false}
         autoCapitalize="none"
       />
+      <TextInput
+        style={[styles.input, styles.multilineText]}
+        placeholder="Message"
+        multiline
+      />
     </View>
   )
 }
@@ -57,5 +62,9 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     marginBottom: 10,
+  },
+  multilineText: {
+    minHeight: 100,
+    textAlignVertical: 'top',
   },
 })
