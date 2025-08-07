@@ -28,6 +28,7 @@ export default function Index() {
       <Link href="/textInput">TextInput</Link>
       <Link href="/switch" >Switch</Link>
       <Link href="/forms">Forms</Link>
+      <Link href="/networking">Networking</Link>
       <Pressable
         className=" bg-orange-500 p-2 rounded-lg"
         onPress={() => router.push('/modal')}
