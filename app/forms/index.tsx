@@ -43,7 +43,7 @@ const LoginForm = () => {
     >
       <View style={styles.form}>
         <Image
-          source={require("./assets/adaptive-icon.png")}
+          source={require("@/assets/images/adaptive-icon.png")}
           style={{
             width: 200,
             height: 400,
