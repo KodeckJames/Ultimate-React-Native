@@ -25,39 +25,55 @@ export default function Networking() {
   const [postTitle, setPostTitle] = useState('')
   const [postBody, setPostBody] = useState('')
   const [isPosting, setIsPosting] = useState(false)
+  const [error, setError] = useState('')
 
   const fetchData = async (limit = 10) => {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
-    )
-    const data = await response.json()
-    setPostList(data)
-    setIsLoading(false)
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
+      )
+      const data = await response.json()
+      setPostList(data)
+      setIsLoading(false)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      setIsLoading(false)
+      setError('Falied to fetch post list')
+    }
   }
   const handleRefresh = () => {
     setRefreshing(true)
     fetchData(20)
     setRefreshing(false)
+  }
+
+  const addPost = async () => {
+    setIsPosting(true)
+    try {
+      const response = await fetch(
+        'https://jsonplaceholder.typicode.com/posts',
+        {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: postTitle,
+            body: postBody,
+          }),
+        }
+      )
+      const newPost = await response.json()
+      setPostList([newPost, ...postList])
+      setPostTitle('')
+      setPostBody('')
+      setIsPosting(false)
+      setError('')
+    } catch (error) {
+      console.error('Error adding new post:', error)
+      setError('Failed to add new post')
     }
-    
-    const addPost = async () => {
-        setIsPosting(true)
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "post",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify({
-                title: postTitle,
-                body: postBody
-            })
-        });
-        const newPost = await response.json();
-        setPostList([newPost, ...postList]);
-        setPostTitle("");
-        setPostBody("");
-        setIsPosting(false);
-    }
+  }
 
   useEffect(() => {
     fetchData()
@@ -72,59 +88,65 @@ export default function Networking() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Post Title"
-            value={postTitle}
-            onChangeText={setPostTitle}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Post Body"
-            value={postBody}
-            onChangeText={setPostBody}
-          />
-          <Button
-            title={isPosting ? 'Adding Post' : 'Add Post'}
-            onPress={addPost}
-            disabled={isPosting}
-          />
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
         </View>
-        <View style={styles.listContainer}>
-          <FlatList
-            data={postList}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.card}>
-                  <Text style={styles.titleText}>{item.title}</Text>
-                  <Text style={styles.bodyText}>{item.body}</Text>
-                </View>
-              )
-            }}
-            ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
-            ListHeaderComponent={
-              <Text
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  color: 'yellow',
-                  fontSize: 26,
-                  alignItems: 'center',
-                }}
-              >
-                Dummy Posts
-              </Text>
-            }
-            ListFooterComponent={
-              <Text style={{ color: 'red', fontSize: 20 }}>The End</Text>
-            }
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-          />
-        </View>
-      </>
+      ) : (
+        <>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Post Title"
+              value={postTitle}
+              onChangeText={setPostTitle}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Post Body"
+              value={postBody}
+              onChangeText={setPostBody}
+            />
+            <Button
+              title={isPosting ? 'Adding Post' : 'Add Post'}
+              onPress={addPost}
+              disabled={isPosting}
+            />
+          </View>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={postList}
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.card}>
+                    <Text style={styles.titleText}>{item.title}</Text>
+                    <Text style={styles.bodyText}>{item.body}</Text>
+                  </View>
+                )
+              }}
+              ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
+              ListHeaderComponent={
+                <Text
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    color: 'yellow',
+                    fontSize: 26,
+                    alignItems: 'center',
+                  }}
+                >
+                  Dummy Posts
+                </Text>
+              }
+              ListFooterComponent={
+                <Text style={{ color: 'red', fontSize: 20 }}>The End</Text>
+              }
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+            />
+          </View>
+        </>
+      )}
     </SafeAreaView>
   )
 }
@@ -173,5 +195,18 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     padding: 8,
     borderRadius: 8,
+  },
+  errorContainer: {
+    backgroundColor: '#FFC0CB',
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    margin: 16,
+    alignItems: 'center',
+  },
+  errorText: {
+    color: '#D8000C',
+    fontSize: 16,
+    textAlign: 'center',
   },
 })
