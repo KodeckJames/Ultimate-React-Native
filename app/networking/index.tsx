@@ -10,6 +10,7 @@ import {
   Button,
 } from 'react-native'
 import { useState, useEffect } from 'react'
+// import Animated from 'react-native-reanimated'
 
 type Post = {
   userId: number
