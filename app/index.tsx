@@ -5,8 +5,10 @@ import {
   ActivityIndicator,
   Button,
   Alert,
+  useColorScheme,
 } from 'react-native'
 import { Link, router } from 'expo-router'
+import { ThemeProvider, DarkTheme, DefaultTheme } from '@react-navigation/native'
 
 export default function Index() {
   //import Redirect from expo-router for this to work
@@ -14,50 +16,53 @@ export default function Index() {
   // if (!isLoggedIn) {
   //   return <Redirect href={'/login'}/>
   // }
+  const colorScheme = useColorScheme();
   return (
-    <View className=" flex-1 justify-center items-center min-h-screen">
-      <ActivityIndicator size={'large'} color={'red'} animating={true} />
-      <Link href="/about">About Page</Link>
-      <Link href="/profile">Profile Page</Link>
-      <Link href="/products">Products</Link>
-      <Link href="/register">Register</Link>
-      <Link href="/login">Login</Link>
-      <Link href="/forgot-password">Forgot-password</Link>
-      <Link href="/flatList">FlatList</Link>
-      <Link href="/dynamicUI">Dynamic UI</Link>
-      <Link href="/textInput">TextInput</Link>
-      <Link href="/switch" >Switch</Link>
-      <Link href="/forms">Forms</Link>
-      <Link href="/networking">Networking</Link>
-      <Pressable
-        className=" bg-orange-500 p-2 rounded-lg"
-        onPress={() => router.push('/modal')}
-      >
-        <Text>Modal</Text>
-      </Pressable>
-      <Link href={'/modal2'}>Modal2</Link>
-      <View>
-        <Button
-          title="Alert"
-          onPress={() =>
-            Alert.alert('Hello, World!', "How are Ya'll doing", [
-              {
-                text: 'Cancel',
-                onPress: () => console.log('Alert Canceled'),
-              },
-              {
-                text: 'Aloo',
-                onPress: () => console.log('Aloo Pressed'),
-              },
-              {
-                text: 'JJ',
-                onPress: () => console.log("It's me JJ"),
-              },
-            ])
-          }
-        />
-        <Button title='Alert2' onPress={()=>alert("Yoinks, this works too!")}/>
+    <ThemeProvider value={colorScheme==='dark'?DarkTheme:DefaultTheme}>
+      <View className=" flex-1 justify-center items-center min-h-screen">
+        <ActivityIndicator size={'large'} color={'red'} animating={true} />
+        <Link href="/about">About Page</Link>
+        <Link href="/profile">Profile Page</Link>
+        <Link href="/products">Products</Link>
+        <Link href="/register">Register</Link>
+        <Link href="/login">Login</Link>
+        <Link href="/forgot-password">Forgot-password</Link>
+        <Link href="/flatList">FlatList</Link>
+        <Link href="/dynamicUI">Dynamic UI</Link>
+        <Link href="/textInput">TextInput</Link>
+        <Link href="/switch" >Switch</Link>
+        <Link href="/forms">Forms</Link>
+        <Link href="/networking">Networking</Link>
+        <Pressable
+          className=" bg-orange-500 p-2 rounded-lg"
+          onPress={() => router.push('/modal')}
+        >
+          <Text>Modal</Text>
+        </Pressable>
+        <Link href={'/modal2'}>Modal2</Link>
+        <View>
+          <Button
+            title="Alert"
+            onPress={() =>
+              Alert.alert('Hello, World!', "How are Ya'll doing", [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Alert Canceled'),
+                },
+                {
+                  text: 'Aloo',
+                  onPress: () => console.log('Aloo Pressed'),
+                },
+                {
+                  text: 'JJ',
+                  onPress: () => console.log("It's me JJ"),
+                },
+              ])
+            }
+          />
+          <Button title='Alert2' onPress={()=>alert("Yoinks, this works too!")}/>
+        </View>
       </View>
-    </View>
+    </ThemeProvider>
   )
 }

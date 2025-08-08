@@ -11,6 +11,8 @@ import {
 } from 'react-native'
 import { useState, useEffect } from 'react'
 // import Animated from 'react-native-reanimated'
+import { useFonts, Inter_900Black } from '@expo-google-fonts/inter'
+import { Bangers_400Regular } from '@expo-google-fonts/bangers/400Regular';
 
 type Post = {
   userId: number
@@ -79,6 +81,15 @@ export default function Networking() {
   useEffect(() => {
     fetchData()
   }, [])
+
+  let [fontsLoaded] = useFonts({
+      Inter_900Black,
+      Bangers_400Regular
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
 
   if (isLoading) {
     return (
@@ -170,11 +181,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   titleText: {
-    fontSize: 30,
+      fontSize: 30,
+      fontFamily:"Bangers_400Regular"
   },
   bodyText: {
     fontSize: 24,
     color: 'orange',
+    fontFamily: 'Inter_900Black',
   },
   loadingContainer: {
     flex: 1,
