@@ -116,6 +116,7 @@ export default function Networking() {
           <View style={styles.listContainer}>
             <FlatList
               data={postList}
+              keyboardDismissMode="on-drag"
               renderItem={({ item }) => {
                 return (
                   <View style={styles.card}>
